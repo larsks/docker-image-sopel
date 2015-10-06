@@ -22,4 +22,4 @@ COPY default.cfg.in /etc/sopel/default.cfg.in
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["runuser", "-u", "sopel", "--", "sopel", "-c", "/home/sopel/default.cfg"]
+CMD ["sopel", "-c", "/home/sopel/default.cfg"]

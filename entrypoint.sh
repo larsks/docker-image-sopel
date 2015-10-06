@@ -1,5 +1,6 @@
 #!/bin/sh
 
+: ${SOPEL_DIR:=/home/sopel}
 : ${SOPEL_IRC_HOST:=localhost}
 : ${SOPEL_IRC_PORT:=6667}
 : ${SOPEL_IRC_SSL:=false}
@@ -13,9 +14,12 @@ for var in SOPEL_NICK SOPEL_OWNER SOPEL_CHANNELS; do
 	fi
 done
 
-if [ ! -f /home/sopel/default.cfg ]; then
-	envtemplate -E /etc/sopel/default.cfg.in > /home/sopel/default.cfg
+if [ ! -f $SOPEL_DIR/default.cfg ]; then
+	envtemplate -E \
+		/etc/sopel/default.cfg.in > $SOPEL_DIR/default.cfg
 fi
 
-exec "$@"
+chown -R sopel:sopel $SOPEL_DIR
+
+exec runuser -u sopel -- "$@"
 
