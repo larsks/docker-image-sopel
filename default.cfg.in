@@ -1,0 +1,13 @@
+[core]
+nick = {{SOPEL_NICK}}
+host = {{SOPEL_IRC_HOST}}
+port = {{SOPEL_IRC_PORT}}
+use_ssl = {{SOPEL_IRC_SSL}}
+owner = {{SOPEL_OWNER}}
+channels = {{SOPEL_CHANNELS}}
+
+{% if SOPEL_EXTRA_CONFIG is defined %}
+{% for opt, optarg in SOPEL_EXTRA_CONFIG.items() %}
+{{opt}} = {{optarg}}
+{% endfor %}
+{% endif %}
